@@ -21,7 +21,7 @@ enum FLEX_DIRECTION_VALUES {
 export const View = styled.View<{
   fillScreen?: boolean;
   direction?: "horizontal" | "vertical";
-  horizontalSpaceMode?: "flex-start" | "center" | "flex-end";
+  horizontalSpaceMode?: "flex-start" | "center" | "space-between" | "flex-end";
   verticalSpaceMode?: "flex-start" | "center" | "flex-end";
 }>`
   flex-direction: ${(props) =>
