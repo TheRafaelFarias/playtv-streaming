@@ -1,22 +1,24 @@
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { NavigationContainer } from "@react-navigation/native";
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import { createStackNavigator } from "@react-navigation/stack";
 import * as React from "react";
+import { GestureHandlerRootView } from "react-native-gesture-handler";
 
-import Colors from "../constants/Colors";
 import useColorScheme from "../hooks/useColorScheme";
 import { HomeScreen } from "../screens/home";
 import { RootStackParamList, RootTabParamList } from "../types";
 
 export default function Navigation() {
   return (
-    <NavigationContainer>
-      <RootNavigator />
-    </NavigationContainer>
+    <GestureHandlerRootView style={{ flex: 1 }}>
+      <NavigationContainer>
+        <RootNavigator />
+      </NavigationContainer>
+    </GestureHandlerRootView>
   );
 }
 
-const Stack = createNativeStackNavigator<RootStackParamList>();
+const Stack = createStackNavigator<RootStackParamList>();
 
 function RootNavigator() {
   return (
@@ -40,18 +42,12 @@ function BottomTabNavigator() {
 
   return (
     <BottomTab.Navigator
-      initialRouteName="Home"
       screenOptions={{
-        tabBarActiveTintColor: Colors[colorScheme].tint,
+        headerShown: false,
       }}
+      initialRouteName="Home"
     >
-      <BottomTab.Screen
-        name="Home"
-        component={HomeScreen}
-        options={() => ({
-          title: "Home",
-        })}
-      />
+      <BottomTab.Screen name="Home" component={HomeScreen} />
     </BottomTab.Navigator>
   );
 }
