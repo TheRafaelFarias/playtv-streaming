@@ -1,10 +1,15 @@
 import React from "react";
-import { Text, View } from "react-native";
+import { ScreenContainer, View } from "../../components/baseComponents";
+import { PlayTVLogo } from "../../components/logo";
 
 export const HomeScreen: React.FC = () => {
   return (
-    <View>
-      <Text>Testing</Text>
-    </View>
+    <ScreenContainer>
+      <View>
+        <View>
+          <PlayTVLogo mode="white" />
+        </View>
+      </View>
+    </ScreenContainer>
   );
 };
