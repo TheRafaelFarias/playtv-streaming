@@ -1,7 +1,7 @@
-import { Text, TextProps } from "./Themed";
+import { Text } from "./Themed";
 
-export function MonoText(props: TextProps) {
-  return (
-    <Text {...props} style={[props.style, { fontFamily: "rubik-semibold" }]} />
-  );
-}
+import styled from "styled-components/native";
+
+export const MonoText = styled(Text)`
+  font-family: "rubik-semibold";
+`;

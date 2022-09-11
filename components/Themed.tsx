@@ -3,22 +3,30 @@
  * https://docs.expo.io/guides/color-schemes/
  */
 
-import { Text as DefaultText, View as DefaultView } from 'react-native';
+import {
+  ColorSchemeName,
+  Text as DefaultText,
+  View as DefaultView,
+} from "react-native";
 
-import Colors from '../constants/Colors';
-import useColorScheme from '../hooks/useColorScheme';
+import Colors from "../constants/Colors";
+
+import styled from "styled-components/native";
 
 export function useThemeColor(
-  props: { light?: string; dark?: string },
+  props: {
+    colorScheme: NonNullable<ColorSchemeName>;
+    light?: string;
+    dark?: string;
+  },
   colorName: keyof typeof Colors.light & keyof typeof Colors.dark
 ) {
-  const theme = useColorScheme();
-  const colorFromProps = props[theme];
+  const colorFromProps = props[props.colorScheme];
 
   if (colorFromProps) {
     return colorFromProps;
   } else {
-    return Colors[theme][colorName];
+    return Colors[props.colorScheme][colorName];
   }
 }
 
@@ -27,19 +35,30 @@ type ThemeProps = {
   darkColor?: string;
 };
 
-export type TextProps = ThemeProps & DefaultText['props'];
-export type ViewProps = ThemeProps & DefaultView['props'];
+export type TextProps = ThemeProps & DefaultText["props"];
+export type ViewProps = ThemeProps & DefaultView["props"];
 
-export function Text(props: TextProps) {
-  const { style, lightColor, darkColor, ...otherProps } = props;
-  const color = useThemeColor({ light: lightColor, dark: darkColor }, 'text');
+export const Text = styled.Text<TextProps>`
+  font-family: "rubik";
+  color: ${(props) =>
+    useThemeColor(
+      {
+        colorScheme: props.theme.colorScheme,
+        light: props.lightColor,
+        dark: props.darkColor,
+      },
+      "text"
+    )};
+`;
 
-  return <DefaultText style={[{ color, fontFamily: "rubik" }, style]} {...otherProps} />;
-}
-
-export function View(props: ViewProps) {
-  const { style, lightColor, darkColor, ...otherProps } = props;
-  const backgroundColor = useThemeColor({ light: lightColor, dark: darkColor }, 'background');
-
-  return <DefaultView style={[{ backgroundColor }, style]} {...otherProps} />;
-}
+export const View = styled.View<ViewProps>`
+  background-color: ${(props) =>
+    useThemeColor(
+      {
+        colorScheme: props.theme.colorScheme,
+        light: props.lightColor,
+        dark: props.darkColor,
+      },
+      "background"
+    )};
+`;
