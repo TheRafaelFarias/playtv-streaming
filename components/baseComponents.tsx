@@ -20,13 +20,15 @@ enum FLEX_DIRECTION_VALUES {
 
 export const View = styled.View<{
   fillScreen?: boolean;
+  transparentBackground?: boolean;
   direction?: "horizontal" | "vertical";
   horizontalSpaceMode?: "flex-start" | "center" | "space-between" | "flex-end";
   verticalSpaceMode?: "flex-start" | "center" | "flex-end";
 }>`
   flex-direction: ${(props) =>
     !props.direction ? "column" : FLEX_DIRECTION_VALUES[props.direction]};
-  background-color: ${(props) => props.theme.secondary};
+  background-color: ${(props) =>
+    props.transparentBackground ? "transparent" : props.theme.secondary};
 
   ${(props) => props.fillScreen && "flex: 1;"}
   ${(props) =>
@@ -41,7 +43,7 @@ export const ScreenContainer: React.FC<React.PropsWithChildren<any>> = ({
 }) => {
   return (
     <>
-      <StatusBar translucent style="inverted" />
+      <StatusBar translucent style="auto" />
       <View fillScreen>
         <SafeAreaView>{children}</SafeAreaView>
       </View>
