@@ -3,8 +3,8 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import * as React from "react";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
+import { BottomTabBar } from "../components/tabbar";
 
-import useColorScheme from "../hooks/useColorScheme";
 import { HomeScreen } from "../screens/home";
 import { RootStackParamList, RootTabParamList } from "../types";
 
@@ -28,9 +28,6 @@ function RootNavigator() {
         component={BottomTabNavigator}
         options={{ headerShown: false }}
       />
-      {/* <Stack.Group screenOptions={{ presentation: "modal" }}>
-        <Stack.Screen name="Modal" component={ModalScreen} />
-      </Stack.Group> */}
     </Stack.Navigator>
   );
 }
@@ -38,16 +35,18 @@ function RootNavigator() {
 const BottomTab = createBottomTabNavigator<RootTabParamList>();
 
 function BottomTabNavigator() {
-  const colorScheme = useColorScheme();
-
   return (
     <BottomTab.Navigator
+      tabBar={(props) => <BottomTabBar {...props} />}
       screenOptions={{
         headerShown: false,
       }}
       initialRouteName="Home"
     >
       <BottomTab.Screen name="Home" component={HomeScreen} />
+      <BottomTab.Screen name="Search" component={HomeScreen} />
+      <BottomTab.Screen name="My Stuff" component={HomeScreen} />
+      <BottomTab.Screen name="Downloads" component={HomeScreen} />
     </BottomTab.Navigator>
   );
 }
