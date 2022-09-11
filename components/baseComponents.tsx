@@ -21,16 +21,19 @@ enum FLEX_DIRECTION_VALUES {
 export const View = styled.View<{
   fillScreen?: boolean;
   direction?: "horizontal" | "vertical";
-  horizontalCenter?: boolean;
-  verticalCenter?: boolean;
+  horizontalSpaceMode?: "flex-start" | "center" | "flex-end";
+  verticalSpaceMode?: "flex-start" | "center" | "flex-end";
 }>`
   flex-direction: ${(props) =>
     !props.direction ? "column" : FLEX_DIRECTION_VALUES[props.direction]};
   background-color: ${(props) => props.theme.secondary};
 
-  ${(props) => props.horizontalCenter && "justify-content: center"}
-  ${(props) => props.verticalCenter && "align-items: center"}
   ${(props) => props.fillScreen && "flex: 1;"}
+  ${(props) =>
+    props.verticalSpaceMode && `align-items: ${props.verticalSpaceMode}`}
+  ${(props) =>
+    props.horizontalSpaceMode &&
+    `justify-content: ${props.horizontalSpaceMode}`}
 `;
 
 export const ScreenContainer: React.FC<React.PropsWithChildren<any>> = ({

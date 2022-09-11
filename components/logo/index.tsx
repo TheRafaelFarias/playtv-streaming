@@ -42,7 +42,7 @@ export const PlayTVLogoSVG: React.FC<
 
 export const PlayTVLogo: React.FC<PlayTVLogoProps> = ({ mode }) => {
   return (
-    <View direction="horizontal" verticalCenter>
+    <View direction="horizontal" verticalSpaceMode="center">
       <PlayTVLogoSVG mode={mode} />
       <PlayTVLogoText>PlayTV</PlayTVLogoText>
     </View>
