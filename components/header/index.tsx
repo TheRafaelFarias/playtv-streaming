@@ -12,10 +12,7 @@ export const Header: React.FC<HeaderProps> = ({ transparent }) => {
   const { top: statusBarHeight } = useSafeAreaInsets();
 
   return (
-    <HeaderContainer
-      statusBarHeight={statusBarHeight}
-      style={{ elevation: 10 }}
-    >
+    <HeaderContainer statusBarHeight={statusBarHeight}>
       <PlayTVLogo mode="white" />
       <HeaderUserIcon>
         <Text>G</Text>
