@@ -6,7 +6,7 @@ declare module "styled-components/native" {
     accent: string;
     secondary: string;
     white: string;
-    bottomTabBackground: string;
+    tabsBackground: string;
   }
 }
 
