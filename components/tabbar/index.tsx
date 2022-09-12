@@ -47,7 +47,11 @@ export const BottomTabBar: React.FC<BottomTabBarProps> = ({
         };
 
         return (
-          <BottomTabBarButton isFocused={isFocused} onPress={onPress}>
+          <BottomTabBarButton
+            key={label}
+            isFocused={isFocused}
+            onPress={onPress}
+          >
             <Icon isActive={isFocused} />
             <BottomTabBarText>{label}</BottomTabBarText>
           </BottomTabBarButton>
